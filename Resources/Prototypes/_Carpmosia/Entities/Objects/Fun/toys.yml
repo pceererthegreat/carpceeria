@@ -1,0 +1,75 @@
+- type: entity
+  parent: [FoamWeaponBase, BaseWeaponLightMachineGun]
+  id: Lightmachinegunfoamsaw
+  name: FF6 SAW
+  description: A scarily accurate plastic replica of the L6 SAW. Only shoots foam bullets.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/LMGs/l6.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-3
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Normal
+  - type: Gun
+    minAngle: 24
+    maxAngle: 45
+    angleIncrease: 4
+    angleDecay: 16
+    fireRate: 8
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineFoamFakeBox
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineFoamFakeBox
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - Bulletfoam
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: PacifismAllowedGun
+  - type: MagazineVisuals
+    magState: mag
+    steps: 4
+    zeroVisible: true
+  - type: Appearance
+
+- type: entity
+  parent: MagazineLightRifleBox # It goes in a fake saw, its funny.
+  id: MagazineFoamFakeBox
+  name: "FF6 SAW Magazine box"
+  description: Plastic box containing a 100-round belt of linked foam darts.
+  components:
+  - type: Tag
+    tags:
+    - MagazineFoamFakeBox
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - BulletFoam
+    proto: BulletFoam
+    capacity: 100
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/light_rifle_box.rsi
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+  - type: Appearance
